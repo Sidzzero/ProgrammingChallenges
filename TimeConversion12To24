@@ -1,0 +1,118 @@
+
+//Source of challenge is Hacker Rank
+/*
+Given a time in -hour AM/PM format, convert it to military (24-hour) time.
+
+Note: - 12:00:00AM on a 12-hour clock is 00:00:00 on a 24-hour clock.
+- 12:00:00PM on a 12-hour clock is 12:00:00 on a 24-hour clock.
+
+Example
+
+
+Return '12:01:00'.
+
+
+Return '00:01:00'.
+
+Function Description
+
+Complete the timeConversion function in the editor below. It should return a new string representing the input time in 24 hour format.
+
+timeConversion has the following parameter(s):
+
+string s: a time in  hour format
+Returns
+
+string: the time in  hour format
+Input Format
+
+A single string  that represents a time in -hour clock format (i.e.:  or ).
+
+Constraints
+
+All input times are valid
+Sample Input 0
+
+07:05:45PM
+Sample Output 0
+
+19:05:45
+*/
+#include <bits/stdc++.h>
+#include <string.h>
+using namespace std;
+
+/*
+ * Complete the 'timeConversion' function below.
+ *
+ * The function is expected to return a STRING.
+ * The function accepts STRING s as parameter.
+ */
+
+string timeConversion(string s) 
+{
+    //Check am or pm
+    //if pm add 12
+    // 24 means 00
+   
+   
+    bool isAM = s[8] == 'A';
+ 
+    if(isAM == true)
+    {
+       if( s[0] == '1' && s[1] == '2' )
+       {
+           s[0] = '0';
+           s[1] = '0';
+           return s.substr(0,8);
+       }    
+           return s.substr(0,8);
+    }
+    else 
+    {
+       
+       //PM 01
+       int iUnitH = (int)s[1] - (int)('0');
+       int iHundH = (int)s[0] - (int)('0');
+       int HH = 0;
+       if(iHundH == 0)
+       {
+           HH = iUnitH;
+       }
+    
+       else 
+       {
+         HH =iHundH*10 +iUnitH ;
+       }
+       if(HH == 12)
+       {
+            return s.substr(0,8);
+       }
+       
+       HH+=12;
+       string str = to_string(HH);
+       s[0] = str[0];
+       s[1] = str[1];
+       return s.substr(0,8);
+    }
+    
+    
+    
+    
+}
+
+int main()
+{
+    ofstream fout(getenv("OUTPUT_PATH"));
+
+    string s;
+    getline(cin, s);
+
+    string result = timeConversion(s);
+
+    fout << result << "\n";
+
+    fout.close();
+
+    return 0;
+}
